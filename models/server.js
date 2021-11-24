@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const { Socket } = require("engine.io");
 
 class Server {
   constructor() {
@@ -16,6 +17,7 @@ class Server {
 
     // Rutas de mi aplicación
     this.routes();
+    this.sockets();
   }
 
   middlewares() {
@@ -27,6 +29,17 @@ class Server {
   }
 
   routes() {}
+
+  // Sockets
+
+  sockets() {
+    this.io.on("connection", (socket) => {
+      console.log("cliente conectado");
+      socket.on("disconnect", () => {
+        console.log("cliente desconectado");
+      });
+    });
+  }
 
   listen() {
     this.server.listen(this.port, () => {
