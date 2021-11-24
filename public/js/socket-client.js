@@ -19,6 +19,10 @@ socket.on("disconnect", () => {
   lbloffline.style.display = "";
 });
 
+socket.on("send-message", (payload)=> {
+  console.log(payload)
+})
+
 btnSend.addEventListener("click", () => {
   const msj = txtMessage.value;
   const payload = {

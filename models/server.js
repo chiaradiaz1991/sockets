@@ -34,14 +34,14 @@ class Server {
 
   sockets() {
     this.io.on("connection", (socket) => {
-      console.log("cliente conectado");
+      // console.log("cliente conectado");
       socket.on("disconnect", () => {
-        console.log("cliente desconectado");
+        // console.log("cliente desconectado");
       });
-
-      socket.on('send-message', (payload)=> {
-        console.log(payload)
-      })
+      socket.on("send-message", (payload) => {
+        // mandar un mensaje a todos los clientes conectados
+        this.io.emit("send-message", payload);
+      });
     });
   }
 
